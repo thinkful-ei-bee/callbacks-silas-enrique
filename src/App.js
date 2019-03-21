@@ -79,23 +79,21 @@ class App extends Component {
     const newAllCards = this.omit(this.state.allCards, cardId);
 
     const newLists = this.state.lists.map(item => {
+
       //  item.cardIds.filter ( item => 
       //   item !== cardId )
       //   return item;
+
+
       for (let x = 0; x < item.cardIds.length; x++){
         if (item.cardIds[x] === cardId ){
           delete item.cardIds[x]
         }
-        
       }
       return item;
-
-      }
-      
+      }  
     )
     
-
-
     this.setState({
       lists: newLists,
       allCards: newAllCards
