@@ -80,19 +80,18 @@ class App extends Component {
 
     const newLists = this.state.lists.map(item => {
 
+      item.cardIds = item.cardIds.filter(id => id !== cardId);
+      return item;
+
+    })
+
       //  item.cardIds.filter ( item => 
       //   item !== cardId )
       //   return item;
 
+      console.log(newLists);
 
-      for (let x = 0; x < item.cardIds.length; x++){
-        if (item.cardIds[x] === cardId ){
-          delete item.cardIds[x]
-        }
-      }
-      return item;
-      }  
-    )
+
     
     this.setState({
       lists: newLists,
