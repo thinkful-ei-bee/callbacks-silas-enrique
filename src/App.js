@@ -60,8 +60,7 @@ class App extends Component {
 
     this.setState({
 
-      // lists: this.state.lists.map(item => {
-      //   return (item.id === listId) ? [...item.cardIds, newCard.id] : item }),
+      list: practiceList,
 
       allCards: {...this.state.allCards,
                 [newCard.id]: newCard
@@ -80,8 +79,23 @@ class App extends Component {
     }
   }
 
+  handleDelete = (cardId) => {
 
-  omit(obj, keyToOmit) {
+    const newAllCards = this.omit(this.state.allCards, cardId);
+    const newLists = this.state.lists.filter(item => {
+      return item !== cardId;
+    })
+
+
+    this.setState({
+      lists: newLists,
+      allCards: newAllCards
+    })
+
+  }
+
+
+  omit = (obj, keyToOmit) => {
     return Object.entries(obj).reduce(
       (newObj, [key, value]) =>
           key === keyToOmit ? newObj : {...newObj, [key]: value},
@@ -104,6 +118,7 @@ class App extends Component {
           {this.state.lists.map(list => (
             <List
               onRandomClick={this.handleRandom}
+              onDeleteClick={this.handleDelete}
               key={list.id}
               id={list.id}
               header={list.header}
