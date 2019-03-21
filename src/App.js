@@ -42,17 +42,45 @@ class App extends Component {
   },
 }
 
+handleRandom = (listId) => {
+console.log(listId)
+const newCard = this.newRandomCard()
+
+
+
+
+
+
+this.setState({
+  ...this.state.lists,
+
+
+
+  allCards: {...this.state.allCards,
+            [newCard.id]: newCard
+}})
+console.log(this.state.allCards)
+}
+
+
+newRandomCard = () => {
+  const id = Math.random().toString(36).substring(2, 4)
+    + Math.random().toString(36).substring(2, 4);
+  return {
+    id,
+    title: `Random Card ${id}`,
+    content: 'lorem ipsum',
+  }
+}
+
+
+
+
+
+
   render() {
 
-  const newRandomCard = () => {
-    const id = Math.random().toString(36).substring(2, 4)
-      + Math.random().toString(36).substring(2, 4);
-    return {
-      id,
-      title: `Random Card ${id}`,
-      content: 'lorem ipsum',
-    }
-  }
+
     
     return (
       <main className='App'>
@@ -62,8 +90,9 @@ class App extends Component {
         <div className='App-list'>
           {this.state.lists.map(list => (
             <List
-              onRandomClick={() => newRandomCard}
+              onRandomClick={this.handleRandom}
               key={list.id}
+              id={list.id}
               header={list.header}
               cards={list.cardIds.map(id => this.state.allCards[id])}
             />
