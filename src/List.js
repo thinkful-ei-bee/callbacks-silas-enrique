@@ -5,16 +5,6 @@ import './List.css';
 export default function List(props) {
     console.log(props)
 
-    const randomCard = ( ) => props.onRandomClick( );
-    function captureRandomCard( ) { 
-        console.log('here')
-        return <Card key = {randomCard.id}
-        title={randomCard.title}
-        content={randomCard.content}/>;
-    }
-
-
-
   return (
     <section className='List'>
       <header className='List-header'>
@@ -31,7 +21,10 @@ export default function List(props) {
         <button
           type='button'
           className='List-add-button'
-          onClick = {() => {captureRandomCard(randomCard)}}
+          onClick = {
+          <Card 
+            
+          />}
           
         >
         
