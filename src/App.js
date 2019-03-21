@@ -42,39 +42,52 @@ class App extends Component {
   },
 }
 
-handleRandom = (listId) => {
-console.log(listId)
-const newCard = this.newRandomCard()
+  handleRandom = (listId) => {
+    console.log(listId)
+    const newCard = this.newRandomCard()
+
+    const practiceList = this.state.lists.map(item => {
+      console.log(item);
+      if(item.id === listId) {
+        item.cardIds = [...item.cardIds, newCard.id];
+      } return item;})
+  
 
 
 
 
 
 
-this.setState({
-  ...this.state.lists,
+    this.setState({
 
+      // lists: this.state.lists.map(item => {
+      //   return (item.id === listId) ? [...item.cardIds, newCard.id] : item }),
 
-
-  allCards: {...this.state.allCards,
-            [newCard.id]: newCard
-}})
-console.log(this.state.allCards)
-}
-
-
-newRandomCard = () => {
-  const id = Math.random().toString(36).substring(2, 4)
-    + Math.random().toString(36).substring(2, 4);
-  return {
-    id,
-    title: `Random Card ${id}`,
-    content: 'lorem ipsum',
+      allCards: {...this.state.allCards,
+                [newCard.id]: newCard
+    }})
+    console.log(practiceList);
   }
-}
 
 
+  newRandomCard = () => {
+    const id = Math.random().toString(36).substring(2, 4)
+      + Math.random().toString(36).substring(2, 4);
+    return {
+      id,
+      title: `Random Card ${id}`,
+      content: 'lorem ipsum',
+    }
+  }
 
+
+  omit(obj, keyToOmit) {
+    return Object.entries(obj).reduce(
+      (newObj, [key, value]) =>
+          key === keyToOmit ? newObj : {...newObj, [key]: value},
+        {}
+      );
+  }
 
 
 
