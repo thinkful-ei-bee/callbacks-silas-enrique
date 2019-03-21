@@ -43,7 +43,7 @@ class App extends Component {
 }
 
   handleRandom = (listId) => {
-    console.log(listId)
+    
     const newCard = this.newRandomCard()
 
     const practiceList = this.state.lists.map(item => {
@@ -52,11 +52,6 @@ class App extends Component {
         item.cardIds = [...item.cardIds, newCard.id];
       } return item;})
   
-
-
-
-
-
 
     this.setState({
 
@@ -82,9 +77,23 @@ class App extends Component {
   handleDelete = (cardId) => {
 
     const newAllCards = this.omit(this.state.allCards, cardId);
-    const newLists = this.state.lists.filter(item => {
-      return item !== cardId;
-    })
+
+    const newLists = this.state.lists.map(item => {
+      //  item.cardIds.filter ( item => 
+      //   item !== cardId )
+      //   return item;
+      for (let x = 0; x < item.cardIds.length; x++){
+        if (item.cardIds[x] === cardId ){
+          delete item.cardIds[x]
+        }
+        
+      }
+      return item;
+
+      }
+      
+    )
+    
 
 
     this.setState({
