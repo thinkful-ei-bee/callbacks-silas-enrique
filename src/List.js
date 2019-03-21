@@ -5,6 +5,11 @@ import './List.css';
 export default function List(props) {
     console.log(props)
 
+  function handleRandom(func) {
+    const x = func;
+    return func;
+  }
+
   return (
     <section className='List'>
       <header className='List-header'>
@@ -21,12 +26,14 @@ export default function List(props) {
         <button
           type='button'
           className='List-add-button'
-          onClick = {
-          <Card 
+          onClick = {this.setState({
+            ...this.state.lists,
+            allCards: {...this.state.allCards,
+
             
-          />}
-          
-        >
+            }
+
+          })}>
         
           + Add Random Card
         </button>

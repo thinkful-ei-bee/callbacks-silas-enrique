@@ -42,15 +42,9 @@ class App extends Component {
   },
 }
 
-  handleRandomClick = () => {
-    const newCard = this.newRandomCard();
-    console.log(newCard)
-    this.setState({
-      ...this.state.allCards,
-    })
-  }
+  render() {
 
-  newRandomCard = () => {
+  const newRandomCard = () => {
     const id = Math.random().toString(36).substring(2, 4)
       + Math.random().toString(36).substring(2, 4);
     return {
@@ -59,9 +53,6 @@ class App extends Component {
       content: 'lorem ipsum',
     }
   }
-
-
-  render() {
     
     return (
       <main className='App'>
@@ -71,7 +62,7 @@ class App extends Component {
         <div className='App-list'>
           {this.state.lists.map(list => (
             <List
-              onRandomClick = {this.handleRandomClick}
+              onRandomClick={() => newRandomCard}
               key={list.id}
               header={list.header}
               cards={list.cardIds.map(id => this.state.allCards[id])}
